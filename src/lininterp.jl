@@ -25,7 +25,7 @@ type Lininterp
 		end
 		n = length(d)
 		nfunc = length(v)
-		ifunc = [1:nfunc]
+		ifunc = collect(1:nfunc)
 		if length(d) != length(g)
 			throw(ArgumentError("v must have as many dims as g has grids"))
 		end
@@ -118,7 +118,7 @@ end
 
 function getValue(l::Lininterp,x::Vector{Float64})
 	# make sure all get evaluated
-	l.ifunc = [1:l.nfunc]
+	l.ifunc = collect(1:l.nfunc)
 	if l.n == 1
 		eval1D(l,x)
 	elseif l.n == 2
@@ -134,7 +134,7 @@ end
 function getValue(l::Lininterp,y::Float64)
 	# make sure all get evaluated
 	x = [y]
-	l.ifunc = [1:l.nfunc]
+	l.ifunc = collect(1:l.nfunc)
 	if l.n == 1
 		eval1D(l,x)
 	elseif l.n == 2
